@@ -9,25 +9,30 @@ public class twosevenone {
     }
 
     private static String[] decode( StringBuilder encode,int k) {
-       String[] ans = new String[k];
-       int i = 0;
-       String en = encode.toString();
-       for(char c : en.toCharArray()){
-       
-        if(c != '*'){
-            if(ans[i] == null){
-                ans[i] = "";
+        StringBuilder[] builders = new StringBuilder[k];
+        for (int j = 0; j < k; j++) {
+            builders[j] = new StringBuilder();
+        }
+    
+        int i = 0;
+        String en = encode.toString();
+        for (char c : en.toCharArray()) {
+            if (c != '*') {
+                builders[i].append(c);
+            } else {
+                i++;
             }
-            ans[i] +=c;
         }
-
-        if(c == '*'){
-           i+=1;
+    
+        String[] ans = new String[k];
+        for (int j = 0; j < k; j++) {
+            ans[j] = builders[j].toString();
         }
-       }
-
-       return ans;
+    
+        return ans;
     }
+    
+    
     private static StringBuilder encode(String[] data) {
        StringBuilder encode = new StringBuilder();
        for(String S: data){
